@@ -4,6 +4,9 @@ import org.springframework.stereotype.Component;
 import ru.app.accountmanagement.dto.UserDto;
 import ru.app.accountmanagement.model.User;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 @Component
 public class UserMapper {
 
@@ -19,7 +22,12 @@ public class UserMapper {
         // Don't map password for security reasons
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
-        
+
+        // Map createdAt from LocalDateTime to OffsetDateTime
+        if (user.getCreatedAt() != null) {
+            userDto.setCreatedAt(OffsetDateTime.of(user.getCreatedAt(), ZoneOffset.UTC));
+        }
+
         return userDto;
     }
 
@@ -35,7 +43,7 @@ public class UserMapper {
         user.setPassword(userDto.getPassword());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        
+
         return user;
     }
 

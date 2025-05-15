@@ -13,16 +13,3 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
     enabled: true
-
-# Swagger/OpenAPI Configuration
-springdoc:
-  api-docs:
-    path: /v3/api-docs
-    enabled: true
-  swagger-ui:
-    path: /swagger-ui.html
-    operationsSorter: method
-    tagsSorter: alpha
-    disable-swagger-default-url: true
-  packages-to-scan: ru.app.accountmanagement.controller
-  writer-with-default-pretty-printer: true
