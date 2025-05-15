@@ -137,7 +137,6 @@
                             <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>
-                            <modelNameSuffix>Dto</modelNameSuffix>
                             <configOptions>
                                 <basePackage>ru.app.accountmanagement</basePackage>
                                 <modelPackage>ru.app.accountmanagement.dto</modelPackage>

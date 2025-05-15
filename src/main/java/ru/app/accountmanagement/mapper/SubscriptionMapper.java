@@ -1,12 +1,12 @@
 package ru.app.accountmanagement.mapper;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Component;
 import ru.app.accountmanagement.dto.SubscriptionDto;
 import ru.app.accountmanagement.model.Subscription;
 import ru.app.accountmanagement.model.User;
 import ru.app.accountmanagement.repository.UserRepository;
-
-import java.util.Optional;
 
 @Component
 public class SubscriptionMapper {
@@ -30,7 +30,7 @@ public class SubscriptionMapper {
         subscriptionDto.setStatus(subscription.getStatus());
         subscriptionDto.setStartDate(subscription.getStartDate());
         subscriptionDto.setEndDate(subscription.getEndDate());
-        
+
         return subscriptionDto;
     }
 
@@ -41,18 +41,18 @@ public class SubscriptionMapper {
 
         Subscription subscription = new Subscription();
         subscription.setId(subscriptionDto.getId());
-        
+
         if (subscriptionDto.getUserId() != null) {
             Optional<User> userOptional = userRepository.findById(subscriptionDto.getUserId());
             userOptional.ifPresent(subscription::setUser);
         }
-        
+
         subscription.setPlanName(subscriptionDto.getPlanName());
         subscription.setPrice(subscriptionDto.getPrice());
         subscription.setStatus(subscriptionDto.getStatus());
         subscription.setStartDate(subscriptionDto.getStartDate());
         subscription.setEndDate(subscriptionDto.getEndDate());
-        
+
         return subscription;
     }
 

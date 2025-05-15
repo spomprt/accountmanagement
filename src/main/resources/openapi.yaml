@@ -1,4 +1,5 @@
 openapi: 3.0.3
+
 info:
   title: Account Management API
   description: API for managing user accounts and subscriptions
@@ -9,15 +10,19 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
+
 servers:
   - url: http://localhost:8080
     description: Local development server
+
 tags:
   - name: User Management
     description: API for managing users
   - name: Subscription Management
     description: API for managing user subscriptions
+
 paths:
+
   /users:
     post:
       tags:
@@ -39,6 +44,7 @@ paths:
                 $ref: '#/components/schemas/UserDto'
         '400':
           description: Invalid input data
+
   /users/{id}:
     get:
       tags:
@@ -112,6 +118,7 @@ paths:
           description: User deleted successfully
         '404':
           description: User not found
+
   /users/{userId}/subscriptions:
     get:
       tags:
@@ -168,6 +175,7 @@ paths:
           description: User not found
         '400':
           description: Invalid input data
+
   /users/{userId}/subscriptions/{subscriptionId}:
     delete:
       tags:
@@ -195,6 +203,7 @@ paths:
           description: Subscription deleted successfully
         '404':
           description: User or subscription not found
+
   /subscriptions/top:
     get:
       tags:
@@ -213,6 +222,7 @@ paths:
                   type: string
 components:
   schemas:
+
     UserDto:
       type: object
       properties:
@@ -231,6 +241,7 @@ components:
         createdAt:
           type: string
           format: date-time
+
     SubscriptionDto:
       type: object
       properties:
