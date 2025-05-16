@@ -1,4 +1,4 @@
-# Account Management Service
+# Account Management Service (Vibe code edition)
 
 ## Overview
 Account Management Service is a Spring Boot application that provides APIs for managing user accounts and their subscriptions to various services. It allows creating and managing users, as well as adding, removing, and tracking subscriptions.
