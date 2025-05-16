@@ -1,15 +1,28 @@
 package ru.app.accountmanagement.repository;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.app.accountmanagement.model.Subscription;
-import ru.app.accountmanagement.model.User;
-
-import java.util.List;
 
 @Repository
-public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
-    List<Subscription> findByUser(User user);
-    List<Subscription> findByUserAndStatus(User user, String status);
-    List<Subscription> findByStatus(String status);
+public interface SubscriptionRepository extends JpaRepository<Subscription, UUID> {
+
+    /**
+     * Find all subscriptions for a specific user
+     * 
+     * @param userId the user ID
+     * @return list of subscriptions
+     */
+    List<Subscription> findByUserId(UUID userId);
+
+    /**
+     * Count subscriptions by service ID
+     * 
+     * @param serviceId the service ID
+     * @return count of subscriptions
+     */
+    long countByServiceId(UUID serviceId);
 }

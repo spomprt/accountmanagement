@@ -1,63 +1,34 @@
 package ru.app.accountmanagement.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.UUID;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.app.accountmanagement.dto.UserDto;
 import ru.app.accountmanagement.model.User;
 import ru.app.accountmanagement.repository.UserRepository;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public void create(User user) {
+        userRepository.save(user);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public void delete(UUID id) {
+        userRepository.deleteById(id);
     }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public User getById(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User createUser(User user) {
+    public User update(User user, UserDto userDto) {
+        user.setUsername(userDto.getUsername());
         return userRepository.save(user);
     }
 
-    public Optional<User> updateUser(Long id, User userDetails) {
-        return userRepository.findById(id)
-                .map(existingUser -> {
-                    if (userDetails.getUsername() != null) {
-                        existingUser.setUsername(userDetails.getUsername());
-                    }
-                    if (userDetails.getEmail() != null) {
-                        existingUser.setEmail(userDetails.getEmail());
-                    }
-                    if (userDetails.getPassword() != null) {
-                        existingUser.setPassword(userDetails.getPassword());
-                    }
-                    if (userDetails.getFirstName() != null) {
-                        existingUser.setFirstName(userDetails.getFirstName());
-                    }
-                    if (userDetails.getLastName() != null) {
-                        existingUser.setLastName(userDetails.getLastName());
-                    }
-                    return userRepository.save(existingUser);
-                });
-    }
-
-    public boolean deleteUser(Long id) {
-        return userRepository.findById(id)
-                .map(user -> {
-                    userRepository.delete(user);
-                    return true;
-                })
-                .orElse(false);
-    }
 }

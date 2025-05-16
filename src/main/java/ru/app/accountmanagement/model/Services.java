@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
 @Entity
-@Table(name = "users")
+@Table(name = "services")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Services {
 
     @Id
     @GeneratedValue
     @UuidGenerator
     private UUID id;
 
-    private String username;
+    private String name;
 
 }
